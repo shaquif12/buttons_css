@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #8AA8C2;
+
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .form-group input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .form-group button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .chatbot-response {
+      background-color: #e1f5fe;
+      padding: 10px;
+      border-radius: 4px;
+      margin-top: 20px;
+      font-size: 16px;
+    }
+
+    /* KissanAI style */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #8AA8C2;
+    }
+
+    .container {
+      background-color: #ffffff;
+      box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+    }
+
+    h1 {
+      color:#2ecc71;
+      font-size: 32px;
+      margin-top: 0;
+      padding: 5px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      color: #333333;
+      font-size: 24px;
+      margin-top: 0;
+      padding: 5px;
+    }
+
+    .form-group input[type="text"] {
+      background-color: #f0f4f8;
+      border: 1px solid #dfe6eb;
+      color: #333333;
+      padding: 5px;
+      margin :10px;
+    }
+
+    .form-group button {
+      background-color: #2ecc71;
+      padding: 5px;
+    }
+
+    .chatbot-response {
+      background-color: #ffffff;
+      border: 1px solid #dfe6eb;
+      color: #333333;
+      padding: 5px;
+    }
+
+    .chatbot-response ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .chatbot-response ul li {
+      margin-bottom: 10px;
+      background-color: #f6f9fc;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .footer {
+        
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        background-color:#8AA8C2;
+        padding: 15px;
+    }
+
+    .footer a {
+        text-decoration: none;
+        color: #4e5dc0;
+        margin: 0 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>KissanAI</h1>
+
+    <form method="POST" class="form-group">
+      {% csrf_token %}
+      <div>
+        <label for="user-input">Enter your Quesions:</label>
+        <input type="text" id="user-input" name="user_input">
+      </div>
+      <div style="text-align: center;">
+        <button type="submit">Send</button>
+        <button type="submit" name="voice" onclick="startListening()">Voice Input</button>
+      </div>
+    </form>
+
+    <h2>Kissan GPT Response:</h2>
+    <div class="chatbot-response">
+      <p>{{ response }}</p>
+    </div>
+
+    <h2>Few Quesions To Ask:</h2>
+    <div class="chatbot-response">
+      <ul>
+        <li onclick="insertText('What are the different types of irrigation methods?')">What are the different types of irrigation methods?</li>
+        <li onclick="insertText('How can I improve soil fertility?')">How can I improve soil fertility?</li>
+        <li onclick="insertText('What are the common diseases in crops and their management?')">What are the common diseases in crops and their management?</li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="footer">
+
+    <p>
+        <a href="#">About</a> |<a href="#">Privacy Policy</a> | <a href="#">Terms</a>
+    </p>
+</div>
+
+
+<script>
+    function startListening() {
+      var button = document.querySelector("[name=voice]");
+      button.classList.add("listening");
+      button.innerHTML = "Listening...";
+    }
+
+    function insertText(text) {
+        var userInput = document.getElementById("user-input");
+        userInput.value = text;
+        userInput.focus();
+    
+        // Submit the form to trigger a response
+        document.querySelector("form").submit();
+      }
+  </script>
+
+ 
+</body>
+</html>
